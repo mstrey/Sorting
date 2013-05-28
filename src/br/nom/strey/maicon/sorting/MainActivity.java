@@ -1,21 +1,16 @@
 package br.nom.strey.maicon.sorting;
 
-import java.util.Locale;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Switch;
 
 public class MainActivity extends FragmentActivity {
 
@@ -87,14 +82,15 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return getString(R.string.bubble_name);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
+				return getString(R.string.insertion_name);
 			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.selection_name);
+			case 3:
+				return getString(R.string.merge_name);
 			}
 			return null;
 		}
@@ -117,12 +113,16 @@ public class MainActivity extends FragmentActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
+			
+			View rootView = inflater.inflate(R.layout.fragment_sorter,
 					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+			
+			Switch dummyTextView = (Switch) rootView
+					.findViewById(R.id.sw_automatic);
+			
+			
+			
+			
 			return rootView;
 		}
 	}
