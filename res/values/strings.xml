@@ -8,5 +8,20 @@
     <string name="selection_name">Selection Sort</string>
     <string name="merge_name">Merge Sort</string>
     <string name="automatic">Automatic</string>
-
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_10">10</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="index1">i = 0</string>
+    <string name="index2">j = 0</string>
+    <string name="index3">k = 0</string>
+    
 </resources>
