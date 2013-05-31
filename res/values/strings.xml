@@ -23,5 +23,7 @@
     <string name="index1">i = 0</string>
     <string name="index2">j = 0</string>
     <string name="index3">k = 0</string>
-    
+    <string name="title_activity_sorters">Sorters</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
