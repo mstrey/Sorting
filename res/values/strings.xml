@@ -19,11 +19,12 @@
     <string name="_9">9</string>
     <string name="_10">10</string>
     <string name="start">Start</string>
+    <string name="next">Next</string>
     <string name="stop">Stop</string>
     <string name="index1">i = 0</string>
     <string name="index2">j = 0</string>
     <string name="index3">k = 0</string>
     <string name="title_activity_sorters">Sorters</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="array_sorted">Array sorted!</string>
 
 </resources>

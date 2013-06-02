@@ -12,9 +12,10 @@
 
     <TextView
         android:id="@+id/txt_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Switch
@@ -32,6 +33,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
+        android:background="#ffffff"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -155,11 +157,27 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_start"
-        style="?android:attr/buttonBarButtonStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bt_start"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/start" />
+
+        <Button
+            android:id="@+id/bt_next"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:enabled="false"
+            android:text="@string/next" />
+    </LinearLayout>
 
 </LinearLayout>
