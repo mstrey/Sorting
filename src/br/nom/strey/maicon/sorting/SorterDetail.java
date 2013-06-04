@@ -9,7 +9,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -69,6 +68,7 @@ public class SorterDetail extends Activity {
 	static float normalTxtSize;
 	static SpannableString spanString;
 	static Boolean isSorting = false;
+	static Boolean isWhiling = false;
 
 	static Integer sorter_type;
 
@@ -134,15 +134,13 @@ public class SorterDetail extends Activity {
 						txt_idx_j.setText("j = " + idx_j);
 						paintIndex(idx_i, idx_j, -1, -1);
 
-						Log.d(SORTER_TAG, "i = " + idx_i + " / j = " + idx_j);
-
 						if (arrayToSort[idx_i] > arrayToSort[idx_j]) {
 							aux = arrayToSort[idx_i];
 							arrayToSort[idx_i] = arrayToSort[idx_j];
 							arrayToSort[idx_j] = aux;
 						}
 						updateValuesBars();
-						printArray();
+						printArray(arrayToSort);
 					}
 				}
 
@@ -173,11 +171,10 @@ public class SorterDetail extends Activity {
 
 						txt_idx_i.setText("i = " + idx_i);
 						txt_idx_j.setText("j = " + idx_j);
-						Log.d(SORTER_TAG, "i = " + idx_i + " / j = " + idx_j);
 
 						resetIndexes();
 						paintIndex(idx_i, idx_j, -1, -1);
-						printArray();
+						printArray(arrayToSort);
 						updateValuesBars();
 					}
 				}
@@ -188,8 +185,8 @@ public class SorterDetail extends Activity {
 		case 1: // selection
 			txt_title.setText(getString(R.string.selection_name));
 			spanString = new SpannableString(ctx.getString(R.string.lowest)
-					+ " = 0");
-			spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
+					+ "(<) = 0");
+			//spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
 			txt_idx_k.setText(spanString);
 			txt_idx_k.setVisibility(View.VISIBLE);
 
@@ -207,9 +204,8 @@ public class SorterDetail extends Activity {
 						aux = 0;
 						lowest = idx_i;
 						spanString = new SpannableString(ctx
-								.getString(R.string.lowest) + " = " + lowest);
-						spanString.setSpan(new UnderlineSpan(), 0,
-								spanString.length(), 0);
+								.getString(R.string.lowest) + "(<) = " + lowest);
+						//spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
 						txt_idx_k.setText(spanString);
 
 						txt_idx_i.setText("i = " + idx_i);
@@ -222,10 +218,9 @@ public class SorterDetail extends Activity {
 							lowest = idx_j;
 							spanString = new SpannableString(ctx
 									.getString(R.string.lowest)
-									+ " = "
+									+ "(<) = "
 									+ lowest);
-							spanString.setSpan(new UnderlineSpan(), 0,
-									spanString.length(), 0);
+							//spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
 							txt_idx_k.setText(spanString);
 						}
 
@@ -238,7 +233,7 @@ public class SorterDetail extends Activity {
 					}
 					updateValuesBars();
 					paintIndex(idx_i, idx_j, -1, lowest);
-					printArray();
+					printArray(arrayToSort);
 				}
 			});
 
@@ -258,10 +253,9 @@ public class SorterDetail extends Activity {
 							lowest = idx_i;
 							spanString = new SpannableString(ctx
 									.getString(R.string.lowest)
-									+ " = "
+									+ "(<) = "
 									+ lowest);
-							spanString.setSpan(new UnderlineSpan(), 0,
-									spanString.length(), 0);
+							//spanString.setSpan(new UnderlineSpan(), 0,spanString.length(), 0);
 							txt_idx_k.setText(spanString);
 						} else {
 							idx_j++;
@@ -271,10 +265,9 @@ public class SorterDetail extends Activity {
 							lowest = idx_j;
 							spanString = new SpannableString(ctx
 									.getString(R.string.lowest)
-									+ " = "
+									+ "(<) = "
 									+ lowest);
-							spanString.setSpan(new UnderlineSpan(), 0,
-									spanString.length(), 0);
+							//spanString.setSpan(new UnderlineSpan(), 0,spanString.length(), 0);
 							txt_idx_k.setText(spanString);
 						}
 
@@ -291,11 +284,9 @@ public class SorterDetail extends Activity {
 
 						txt_idx_i.setText("i = " + idx_i);
 						txt_idx_j.setText("j = " + idx_j);
-						Log.d(SORTER_TAG, "i = " + idx_i + " / j = " + idx_j
-								+ " / menor = " + lowest);
 
 						resetIndexes();
-						printArray();
+						printArray(arrayToSort);
 						updateValuesBars();
 						paintIndex(idx_i, idx_j, -1, lowest);
 					}
@@ -306,8 +297,8 @@ public class SorterDetail extends Activity {
 
 		case 2: // insertion
 			txt_title.setText(getString(R.string.insertion_name));
-			spanString = new SpannableString("key = 0");
-			spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
+			spanString = new SpannableString(ctx.getString(R.string.key)+"(<) = " + key);
+			//spanString.setSpan(new UnderlineSpan(), 0, spanString.length(), 0);
 			txt_idx_k.setText(spanString);
 			txt_idx_k.setVisibility(View.VISIBLE);
 
@@ -321,77 +312,79 @@ public class SorterDetail extends Activity {
 						startSorter();
 						updateValuesBars();
 
-						idx_i = 0;
-						idx_j = idx_i + 1;
 						aux = 0;
+
+						idx_j = 1;
+						//idx_i = 0;
 						key = arrayToSort[idx_j];
 						idx_i = idx_j - 1;
-
+						
 						txt_idx_i.setText("i = " + idx_i);
 						txt_idx_j.setText("j = " + idx_j);
-						spanString = new SpannableString("key = " + key);
-						spanString.setSpan(new UnderlineSpan(), 0,
-								spanString.length(), 0);
+						spanString = new SpannableString(ctx.getString(R.string.key)+" = " + key);
+						//spanString.setSpan(new UnderlineSpan(), 0,spanString.length(), 0);
 						txt_idx_k.setText(spanString);
 
-						paintIndex(idx_i, idx_j, -1, key);
+						paintIndex(idx_i, idx_j, -1, getIndexArray(arrayToSort,key));
 
-						Log.d(SORTER_TAG, "i = " + idx_i + " / j = " + idx_j
-								+ " / menor = " + lowest);
-						idx_i = idx_j - 1;
-						if ((idx_i >= 0) && (arrayToSort[idx_i] > key)) {
-							Log.d(SORTER_TAG, "i = " + idx_i + " / j = "
-									+ idx_j + " / key = " + key);
+						isWhiling = ((idx_i >= 0) && (arrayToSort[idx_i] > key));
+						if (isWhiling) {
 							arrayToSort[idx_i + 1] = arrayToSort[idx_i];
+							arrayToSort[idx_i] = key;
 							idx_i = idx_i - 1;
 
+						} else {
+							arrayToSort[idx_i + 1] = key;
 						}
-						arrayToSort[idx_i + 1] = key;
-
 					}
 					updateValuesBars();
-					printArray();
+					printArray(arrayToSort);
 				}
+
 			});
 
 			bt_next.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					int idx_j_ant = idx_j;
 
-					if (idx_j_ant != idx_j) {
-						Log.d(SORTER_TAG, "fim J, reinicia I");
-						key = arrayToSort[idx_j];
-						idx_i = idx_j - 1;
+					if (idx_j < arrayToSort.length) {
+						if (!isWhiling) {
+							Log.d(SORTER_TAG, "fim J, reinicia I");
+							key = arrayToSort[idx_j];
+							idx_i = idx_j - 1;
 
-						spanString = new SpannableString("key = " + key);
-						spanString.setSpan(new UnderlineSpan(), 0,
-								spanString.length(), 0);
+							spanString = new SpannableString(ctx.getString(R.string.key)+" = " + key);
+							//spanString.setSpan(new UnderlineSpan(), 0,spanString.length(), 0);
+							txt_idx_k.setText(spanString);
+
+						}
+						
+						isWhiling = ((idx_i >= 0) && (arrayToSort[idx_i] > key));
+						
+						if (isWhiling) {
+							arrayToSort[idx_i + 1] = arrayToSort[idx_i];
+							idx_i = idx_i - 1;
+						}else{
+							arrayToSort[idx_i + 1] = key;
+							idx_j++;
+						}
+						txt_idx_i.setText("i = " + idx_i);
+						txt_idx_j.setText("j = " + idx_j);
+						spanString = new SpannableString(ctx.getString(R.string.key)+" = " + key);
+						//spanString.setSpan(new UnderlineSpan(), 0,spanString.length(), 0);
 						txt_idx_k.setText(spanString);
 
+						resetIndexes();
+						paintIndex(idx_i, idx_j, -1, getIndexArray(arrayToSort,key));
+						printArray(arrayToSort);
+						updateValuesBars();
+					} else {
+						stopSorter();
+
+						Toast.makeText(ctx,
+								ctx.getString(R.string.array_sorted),
+								Toast.LENGTH_SHORT).show();
 					}
-
-					arrayToSort[idx_i + 1] = arrayToSort[idx_i];
-					idx_i = idx_i - 1;
-					Log.d(SORTER_TAG, "i = " + idx_i + " / j = " + idx_j
-							+ " / key = " + key);
-
-					if (!((idx_i >= 0) && (arrayToSort[idx_i] > key))) {
-						arrayToSort[idx_i + 1] = key;
-						idx_j++;
-					}
-
-					txt_idx_i.setText("i = " + idx_i);
-					txt_idx_j.setText("j = " + idx_j);
-					spanString = new SpannableString("key = " + key);
-					spanString.setSpan(new UnderlineSpan(), 0,
-							spanString.length(), 0);
-					txt_idx_k.setText(spanString);
-
-					resetIndexes();
-					paintIndex(idx_i, idx_j, -1, key);
-					printArray();
-					updateValuesBars();
 				}
 			});
 
@@ -428,9 +421,17 @@ public class SorterDetail extends Activity {
 	}
 
 	private void paintIndex(int i, int j, int k, int l) {
+		String indexes = "";
+		if (i>=0) {indexes = " i = " + i ;}
+		if (j>=0) {indexes += ", j = " + j ;}
+		if (l>=0) {indexes += ", l = " + l ;}
+		
 		paintIndex_i(i);
 		paintIndex_j(j);
 		paintIndex_lowest(l);
+
+		Log.d(SORTER_TAG, indexes);
+
 	}
 
 	private static void paintIndex_i(int i) {
@@ -504,7 +505,7 @@ public class SorterDetail extends Activity {
 
 	private static void paintIndex_lowest(int l) {
 		l++;
-		Log.d(SORTER_TAG, "menor = " + l);
+		Log.d(SORTER_TAG, "lowest:"+l);
 		switch (l) {
 		case 1:
 			txt_1.setText(txt_1.getText().toString() + "<");
@@ -744,17 +745,17 @@ public class SorterDetail extends Activity {
 
 	}
 
-	private static void printArray() {
-		String array = "[" + arrayToSort[0] + ", ";
-		array += arrayToSort[1] + ", ";
-		array += arrayToSort[2] + ", ";
-		array += arrayToSort[3] + ", ";
-		array += arrayToSort[4] + ", ";
-		array += arrayToSort[5] + ", ";
-		array += arrayToSort[6] + ", ";
-		array += arrayToSort[7] + ", ";
-		array += arrayToSort[8] + ", ";
-		array += arrayToSort[9] + "]";
+	private static void printArray(Integer[] arrayToPrint) {
+		String array = "[" + arrayToPrint[0] + ", ";
+		array += arrayToPrint[1] + ", ";
+		array += arrayToPrint[2] + ", ";
+		array += arrayToPrint[3] + ", ";
+		array += arrayToPrint[4] + ", ";
+		array += arrayToPrint[5] + ", ";
+		array += arrayToPrint[6] + ", ";
+		array += arrayToPrint[7] + ", ";
+		array += arrayToPrint[8] + ", ";
+		array += arrayToPrint[9] + "]";
 		Log.d(SORTER_TAG, array);
 	}
 
@@ -768,7 +769,9 @@ public class SorterDetail extends Activity {
 		aux = 0;
 		key = 0;
 
+		printArray(primaryArray);
 		arrayToSort = primaryArray;
+		printArray(arrayToSort);
 		updateValuesBars();
 		resetIndexes();
 	}
@@ -782,5 +785,18 @@ public class SorterDetail extends Activity {
 		List<Integer> arraySorted = Arrays.asList(primaryArray);
 		Collections.shuffle(arraySorted);
 		arrayToSort = (Integer[]) arraySorted.toArray();
+		printArray(arrayToSort);
+	}
+
+	private int getIndexArray(Integer[] arrayToSort, int key) {
+		int index = 0;
+		
+		for (int i = 0; i < arrayToSort.length; i++) {
+			if (key == arrayToSort[i]) {
+				index = i;
+			}
+		}
+				
+		return index;
 	}
 }
