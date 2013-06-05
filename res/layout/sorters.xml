@@ -3,12 +3,13 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="@string/app_name"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Sorters" >
+    tools:context=".Sorters" xmlns:app="http://schemas.android.com/apk/lib/com.google.ads">
 
     <Switch
         android:id="@+id/sw_automatic"
@@ -16,7 +17,8 @@
         android:layout_height="wrap_content"
         android:checked="false"
         android:text="@string/automatic"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="visible" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -61,7 +63,35 @@
             android:layout_row="3"
             android:drawableTop="@drawable/merge_icon"
             android:text="@string/merge_name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="gone" />
     </GridLayout>
+
+    <RelativeLayout
+        android:id="@+id/container_ads"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center|bottom"
+        android:minHeight="50dip" >
+
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/banner_seashell"
+            android:visibility="visible" />
+
+        <com.google.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:adSize="BANNER"
+            app:adUnitId="a15010288267eab" >
+        </com.google.ads.AdView>
+    </RelativeLayout>
 
 </LinearLayout>
