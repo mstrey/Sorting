@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.nom.strey.maicon.sorting.SorterDetail" >
+        <activity android:name="br.nom.strey.maicon.sorting.SorterDetail"
+            android:parentActivityName="br.nom.strey.maicon.sorting.Sorters" >
         </activity>
         <activity
             android:name="com.google.ads.AdActivity"

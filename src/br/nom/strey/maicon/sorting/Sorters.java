@@ -33,7 +33,6 @@ public class Sorters extends Activity {
 		TextView txt_bubble = (TextView) findViewById(R.id.txt_bubble);
 		TextView txt_selection = (TextView) findViewById(R.id.txt_selection);
 		TextView txt_insertion = (TextView) findViewById(R.id.txt_insertion);
-		TextView txt_merge = (TextView) findViewById(R.id.txt_merge);
 
 		final Switch sw_automatic = (Switch) findViewById(R.id.sw_automatic);
 
@@ -79,21 +78,6 @@ public class Sorters extends Activity {
 			}
 		});
 
-		txt_merge.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sw_automatic.setChecked(true);
-				Intent intent = new Intent(getBaseContext(), SorterDetail.class);
-				Bundle extras = new Bundle();
-				extras.putInt(SORTER_TYPE, 3);
-				extras.putBoolean(SORTER_AUTOMATIC, sw_automatic.isChecked());
-				intent.putExtras(extras);
-				startActivity(intent);
-			}
-		});
-		
 		ImageView banner = (ImageView) findViewById(R.id.banner);
 		
 		banner.setOnClickListener(new View.OnClickListener() {
