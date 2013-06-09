@@ -109,7 +109,7 @@ public class SorterDetail extends Activity {
 		txt_idx_i = (TextView) findViewById(R.id.txt_idx1);
 		txt_idx_j = (TextView) findViewById(R.id.txt_idx2);
 		txt_idx_k = (TextView) findViewById(R.id.txt_idx3);
-/*
+
 		ImageView banner = (ImageView) findViewById(R.id.banner_detail);
 
 		banner.setOnClickListener(new View.OnClickListener() {
@@ -126,14 +126,19 @@ public class SorterDetail extends Activity {
 		if (isConnected(getBaseContext())) { // se estiver conectado exibe
 												// anuncio do AdMob
 			AdView adView = (AdView) findViewById(R.id.adView_detail);
-			// Carrega um anúncio genérico para testes que não gera monetização.
-			adView.loadAd(new AdRequest()
-					.addTestDevice("A783C1868D1441A3CC47E7681566D639"));
+			if (Sorters.DEBUG) {
+				// Carrega um anúncio genérico para testes que não gera
+				// monetização.
+				adView.loadAd(new AdRequest()
+						.addTestDevice("A783C1868D1441A3CC47E7681566D639"));
 
-			// carrega anúncio válido que gera monetização
-			// adView.loadAd(new AdRequest());
+			} else {
+				// carrega anúncio válido que gera monetização
+				adView.loadAd(new AdRequest());
+
+			}
 		}
-*/
+
 		txt_idx_i.setTextColor(COLOR_IDX_I);
 		txt_idx_j.setBackgroundColor(COLOR_IDX_BACKGROUND_J);
 
@@ -800,7 +805,7 @@ public class SorterDetail extends Activity {
 		// printArray(PRIMARY_ARRAY);
 		// arrayToSort = PRIMARY_ARRAY;
 		// printArray(arrayToSort);
-		//updateValuesBars(PRIMARY_ARRAY);
+		// updateValuesBars(PRIMARY_ARRAY);
 		resetIndexes();
 	}
 
@@ -861,53 +866,55 @@ public class SorterDetail extends Activity {
 			return false;
 		}
 	}
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-	    outState.putInt("IDX_1", idx_1);
-	    outState.putInt("IDX_2", idx_2);
-	    outState.putInt("IDX_3", idx_3);
-	    outState.putInt("LOWEST", lowest);
-	    outState.putInt("KEY", key);
-	    outState.putBoolean("ISSORTING", isSorting);
-	    
-	    super.onSaveInstanceState(outState);
+		outState.putInt("IDX_1", idx_1);
+		outState.putInt("IDX_2", idx_2);
+		outState.putInt("IDX_3", idx_3);
+		outState.putInt("LOWEST", lowest);
+		outState.putInt("KEY", key);
+		outState.putBoolean("ISSORTING", isSorting);
+
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-	    super.onRestoreInstanceState(savedInstanceState);
+		super.onRestoreInstanceState(savedInstanceState);
 
-	    idx_1 = savedInstanceState.getInt("IDX_1");
-	    idx_2 = savedInstanceState.getInt("IDX_2");
-	    idx_3 = savedInstanceState.getInt("IDX_3");
-	    lowest = savedInstanceState.getInt("LOWEST");
-	    key = savedInstanceState.getInt("KEY");
-	    isSorting = savedInstanceState.getBoolean("ISSORTING");
-	    
-	    if (isSorting) {
-		    updateValuesBars(arrayToSort);
+		idx_1 = savedInstanceState.getInt("IDX_1");
+		idx_2 = savedInstanceState.getInt("IDX_2");
+		idx_3 = savedInstanceState.getInt("IDX_3");
+		lowest = savedInstanceState.getInt("LOWEST");
+		key = savedInstanceState.getInt("KEY");
+		isSorting = savedInstanceState.getBoolean("ISSORTING");
+
+		if (isSorting) {
+			updateValuesBars(arrayToSort);
 			txt_idx_i.setText("i = " + idx_1);
 			txt_idx_j.setText("j = " + idx_2);
-			
+
 			bt_next.setEnabled(true);
 			bt_start.setText(ctx.getString(R.string.stop));
-			
-		    switch (sorter_type) {
+
+			switch (sorter_type) {
 			case 0:
 				paintIndex(idx_1, idx_2, -1, -1);
-				
+
 				break;
 
 			case 1:
 				paintIndex(idx_1, idx_2, -1, lowest);
-				txt_idx_k.setText(ctx.getString(R.string.lowest) + " = "+ lowest);
-				
+				txt_idx_k.setText(ctx.getString(R.string.lowest) + " = "
+						+ lowest);
+
 				break;
 
 			case 2:
 				paintIndex(idx_1, idx_2, -1, getIndexArray(arrayToSort, key));
-				txt_idx_k.setText(ctx.getString(R.string.key) + " = "+ key);
-				
+				txt_idx_k.setText(ctx.getString(R.string.key) + " = " + key);
+
 				break;
 
 			default:

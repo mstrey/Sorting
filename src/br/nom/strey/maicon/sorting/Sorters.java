@@ -22,6 +22,7 @@ public class Sorters extends Activity {
 
 	static final String SORTER_TYPE = "sorter_type";
 	static final String SORTER_AUTOMATIC = "sorter_automatic";
+	static final Boolean DEBUG = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +92,16 @@ public class Sorters extends Activity {
 		
         if (isConnected(getBaseContext())){ // se estiver conectado exibe anuncio do AdMob
             AdView adView = (AdView)findViewById(R.id.adView);
-            // Carrega um anúncio genérico para testes que não gera monetização.
-            adView.loadAd(new AdRequest().addTestDevice("A783C1868D1441A3CC47E7681566D639"));
             
-            // carrega anúncio válido que gera monetização
-            //adView.loadAd(new AdRequest());
+            if (Sorters.DEBUG) {
+                // Carrega um anúncio genérico para testes que não gera monetização.
+                adView.loadAd(new AdRequest().addTestDevice("A783C1868D1441A3CC47E7681566D639"));
+				
+			} else{
+	            // carrega anúncio válido que gera monetização
+	            adView.loadAd(new AdRequest());
+				
+			}
         } 
 
 	}
