@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ordenadores Visuais</string>
+    <string name="app_name">Ordenadores</string>
     <string name="action_settings">Configurações</string>
     <string name="bubble_name">Bubble</string>
     <string name="insertion_name">Insertion</string>
@@ -20,7 +20,7 @@
     <string name="_9">9</string>
     <string name="_10">10</string>
     <string name="start">Iniciar</string>
-    <string name="next">Proximo</string>
+    <string name="next">Próximo</string>
     <string name="stop">Parar</string>
     <string name="index1">i = 0</string>
     <string name="index2">j = 0</string>
