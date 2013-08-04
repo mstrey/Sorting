@@ -22,7 +22,7 @@ public class Sorters extends Activity {
 
 	static final String SORTER_TYPE = "sorter_type";
 	static final String SORTER_AUTOMATIC = "sorter_automatic";
-	static final Boolean DEBUG = false;
+	static final Boolean DEBUG = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

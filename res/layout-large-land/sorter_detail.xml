@@ -192,12 +192,12 @@
             android:visibility="visible" />
 
         <com.google.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
             android:id="@+id/adView_detail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             app:adSize="BANNER"
-            app:adUnitId="a151b39534dd08f" >
+            app:adUnitId="a151b39534dd08f"
+            android:gravity="center_vertical|center_horizontal">
         </com.google.ads.AdView>
     </RelativeLayout>
 
